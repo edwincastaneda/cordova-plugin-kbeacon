@@ -1,0 +1,9 @@
+dependencies {
+    implementation 'com.kkmcn.kbeaconlib2:kbeaconlib2:1.1.9'
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}

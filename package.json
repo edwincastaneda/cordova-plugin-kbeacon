@@ -1,0 +1,17 @@
+{
+  "name": "app.heroesde4patas.cordova.plugin.kbeacon",
+  "version": "1.0.0",
+  "description": "",
+  "cordova": {
+    "id": "app.heroesde4patas.cordova.plugin.kbeacon",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="app.heroesde4patas.cordova.plugin.kbeacon" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>cordovaPluginKBeacon</name>
+    <js-module name="cordovaPluginKBeacon" src="www/cordova-plugin-kbeacon.js">
+        <clobbers target="cordova.plugins.kbeacon" />
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="cordovaPluginKBeacon">
+                <param name="android-package" value="app.heroesde4patas.cordova.plugin.kbeacon.cordovaPluginKBeacon" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-feature
+                    android:name="android.hardware.bluetooth_le"
+                    android:required="true" />
+
+            <uses-permission android:name="android.permission.BLUETOOTH"/>
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        </config-file>
+<!--        <framework src="src/android/kbeacon.gradle" custom="true" type="gradleReference" />-->
+        <framework src="com.kkmcn.kbeaconlib2:kbeaconlib2:1.1.9" />
+        <source-file src="src/android/cordovaPluginKBeacon.java" target-dir="src/app/heroesde4patas/cordova/plugin/kbeacon/cordovaPluginKBeacon" />
+    </platform>
+</plugin>
