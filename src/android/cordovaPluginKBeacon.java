@@ -25,38 +25,23 @@ import android.view.Gravity;
 import android.widget.Toast;
 import android.os.Build;
 
-import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAccSensorValue;
+
 import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvPacketBase;
-import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvPacketEddyTLM;
-import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvPacketEddyUID;
-import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvPacketEddyURL;
 import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvPacketIBeacon;
-import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvPacketSensor;
-import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvPacketSystem;
 import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvType;
 import com.kkmcn.kbeaconlib2.KBeacon;
 import com.kkmcn.kbeaconlib2.KBeaconsMgr;
 
-import java.util.HashMap;
 
-/**
- * This class echoes a string called from JavaScript.
- */
 public class cordovaPluginKBeacon extends CordovaPlugin {
 
-    String LOG_TAG = "KBeaconPlugin";
-
-    private HashMap<String, KBeacon> mBeaconsDictory;
-    private KBeacon[] mBeaconsArray;
     private JSONArray beaconsJSONArray = new JSONArray();
     private JSONArray beaconsDetectedJSONArray = new JSONArray();
 
     private KBeaconsMgr mBeaconsMgr;
     private KBeaconsMgr.KBeaconMgrDelegate beaconMgr;
+    private int SCAN_MIN_RSSI_FILTER = -100;
 
-    private int mScanFailedContinueNum = 0;
-
-    private final static int  MAX_ERROR_SCAN_NUMBER = 2;
     private final static int PERMISSION_CONNECT = 20;
     private static final int PERMISSION_COARSE_LOCATION = 22;
     private static final int PERMISSION_FINE_LOCATION = 23;
@@ -106,16 +91,12 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
 
             @Override
             public void onScanFailed(int errorCode) {
-                toastShow("Start N scan failed：" + errorCode);
-                if (mScanFailedContinueNum >= MAX_ERROR_SCAN_NUMBER){
-                    toastShow("Scan encount error, error time:" + mScanFailedContinueNum);
-                }
-                mScanFailedContinueNum++;
+
             }
 
             @Override
             public void onCentralBleStateChang(int newState) {
-                toastShow("centralBleStateChang" + newState);
+
             }
 
 
@@ -127,11 +108,14 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
          * Validate if Manager of Beacons is supported
          */
         if (mBeaconsMgr == null){
-            toastShow("mBeaconsMgr es null, El dispositivo no puede leer beacons");
+            toastShow("El dispositivo no puede leer beacons");
         }
 
+        /**
+         * Assign beaconMgr (Beacon Manager)
+         */
         mBeaconsMgr.delegate = beaconMgr;
-        mBeaconsMgr.setScanMinRssiFilter(-80);
+        mBeaconsMgr.setScanMinRssiFilter(SCAN_MIN_RSSI_FILTER);
         mBeaconsMgr.setScanMode(KBeaconsMgr.SCAN_MODE_LOW_LATENCY);
 
 
@@ -140,13 +124,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callback) throws JSONException {
         this.command = callback;
-        toastShow("We are entering execute");
-
-//        if (action.equals("coolMethod")) {
-//            String message = args.getString(0);
-//            this.coolMethod(message, callback);
-//            return true;
-//        }
+        //toastShow("We are entering execute");
 
         if ("startScan".equalsIgnoreCase(action)) {
             this.startScan(callback);
@@ -184,7 +162,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     }
 
     private void startScan(CallbackContext callbackContext){
-        mBeaconsMgr.setScanMinRssiFilter(-60);
+        mBeaconsMgr.setScanMinRssiFilter(SCAN_MIN_RSSI_FILTER);
         int nStartScan = mBeaconsMgr.startScanning();
         if (nStartScan == 0){
             callbackContext.success("Iniciando la lectura de dispositivos");
@@ -254,17 +232,6 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     }
 
 
-//    private void coolMethod(String message, CallbackContext callbackContext) {
-//
-//        toastShow("We are entering coolMethod");
-//        if (message != null && message.length() > 0) {
-//            callbackContext.success(message);
-//        } else {
-//            callbackContext.error("Expected one non-empty string argument.");
-//        }
-//    }
-
-
 
     public static boolean jsonArrayContains(JSONArray jsonArray, Object value) {
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -278,12 +245,6 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
             }
         }
         return false;
-    }
-
-
-    public static double calculateDistance(double rssi, double calibratedPower, double n) {
-        double distance = Math.pow(10, ((Math.abs(rssi) - Math.abs(calibratedPower)) / (10 * n)));
-        return distance;
     }
 
 

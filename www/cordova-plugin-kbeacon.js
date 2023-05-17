@@ -1,12 +1,4 @@
-// Empty constructor
 function KBeacon() {}
-
-
-//KBeacon.prototype.coolMethod = function(message, successCallback, errorCallback) {
-//    var options = {};
-//    options.message = message;
-//    cordova.exec(successCallback, errorCallback, 'cordovaPluginKBeacon', 'coolMethod', [options]);
-//}
 
 KBeacon.prototype.startScan = function(successCallback, errorCallback) {
     cordova.exec(successCallback, errorCallback, 'cordovaPluginKBeacon', 'startScan', []);
