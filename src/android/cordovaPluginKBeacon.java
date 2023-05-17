@@ -71,7 +71,10 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                                 if (!jsonArrayContains(beaconsDetectedJSONArray, mac)) {
                                     beaconsDetectedJSONArray.put(mac);
 
-                                    KBArray.put(beacon.getMac());
+                                    String originalString = beacon.getMac();
+                                    originalString.replace(":", "");
+
+                                    KBArray.put(originalString);
                                     KBArray.put(beacon.getName());
                                     KBArray.put(beacon.getRssi());
 
