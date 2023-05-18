@@ -43,7 +43,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     private JSONArray[] mBeaconsArray;
     private KBeaconsMgr mBeaconsMgr;
     private KBeaconsMgr.KBeaconMgrDelegate beaconMgr;
-    private int SCAN_MIN_RSSI_FILTER = -100;
+    private int SCAN_MIN_RSSI_FILTER = -300;
 
     private final static int PERMISSION_CONNECT = 20;
     private static final int PERMISSION_COARSE_LOCATION = 22;
@@ -168,7 +168,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                 objeto = objeto + mBeaconsArray[i];
             }
             objeto = objeto + "]";
-            
+
 
             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, objeto);
             callbackContext.sendPluginResult(pluginResult);
