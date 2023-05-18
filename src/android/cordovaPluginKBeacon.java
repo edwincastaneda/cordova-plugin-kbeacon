@@ -32,12 +32,15 @@ import com.kkmcn.kbeaconlib2.KBAdvPackage.KBAdvType;
 import com.kkmcn.kbeaconlib2.KBeacon;
 import com.kkmcn.kbeaconlib2.KBeaconsMgr;
 
+import java.util.HashMap;
 
 public class cordovaPluginKBeacon extends CordovaPlugin {
 
     private JSONArray beaconsJSONArray = new JSONArray();
     private JSONArray beaconsDetectedJSONArray = new JSONArray();
 
+    private HashMap<String, JSONArray> mBeaconsDictory;
+    private JSONArray[] mBeaconsArray;
     private KBeaconsMgr mBeaconsMgr;
     private KBeaconsMgr.KBeaconMgrDelegate beaconMgr;
     private int SCAN_MIN_RSSI_FILTER = -100;
@@ -51,26 +54,24 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     private CallbackContext command;
     private Activity cordovaActivity;
 
+
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
 
+        mBeaconsDictory = new HashMap<>(50);
         beaconMgr = new KBeaconsMgr.KBeaconMgrDelegate() {
 
             @Override
             public void onBeaconDiscovered(KBeacon[] beacons) {
                 for (KBeacon beacon: beacons){
+
+                    //mBeaconsDictory.put(beacon.getMac(), beacon);
                     for (KBAdvPacketBase advPacket : beacon.allAdvPackets()) {
                         switch (advPacket.getAdvType()) {
                             case KBAdvType.IBeacon: {
                                 KBAdvPacketIBeacon advIBeacon = (KBAdvPacketIBeacon) advPacket;
                                 JSONArray KBArray = new JSONArray();
-
-                                String mac = beacon.getMac();
-
-                                if (!jsonArrayContains(beaconsDetectedJSONArray, mac)) {
-                                    beaconsDetectedJSONArray.put(mac);
-
                                     KBArray.put(beacon.getMac());
                                     KBArray.put(beacon.getName());
                                     KBArray.put(beacon.getRssi());
@@ -80,12 +81,17 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                                     KBArray.put(advIBeacon.getMajorID());
                                     KBArray.put(advIBeacon.getMinorID());
 
-                                    beaconsJSONArray.put(KBArray);
+                                mBeaconsDictory.put(beacon.getMac(), KBArray);
                                 }
                                break;
                             }
                         }
                     }
+
+
+                if (mBeaconsDictory.size() > 0) {
+                    mBeaconsArray = new JSONArray[mBeaconsDictory.size()];
+                    mBeaconsDictory.values().toArray(mBeaconsArray);
                 }
             }
 
@@ -152,8 +158,19 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
 
 
     private void getDiscoveredDevices(CallbackContext callbackContext){
-        if (beaconsJSONArray != null) {
-            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, beaconsJSONArray.toString());
+        if (mBeaconsArray != null) {
+
+            String objeto = "[";
+            for (int i = 0; i < mBeaconsArray.length; i++) {
+                if(i > 0){
+                    objeto = objeto + ",";
+                }
+                objeto = objeto + mBeaconsArray[i];
+            }
+            objeto = objeto + "]";
+            
+
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, objeto);
             callbackContext.sendPluginResult(pluginResult);
         } else {
             PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, "El arreglo es nulo");
