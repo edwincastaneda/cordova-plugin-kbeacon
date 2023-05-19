@@ -49,6 +49,9 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     private static final int PERMISSION_COARSE_LOCATION = 22;
     private static final int PERMISSION_FINE_LOCATION = 23;
     private static final int PERMISSION_SCAN = 24;
+    private static final int PERMISSION_BACKGROUND_LOCATION = 25;
+    private static final int PERMISSION_WAKE_LOCK = 26;
+
 
 
     private CallbackContext command;
@@ -217,7 +220,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                 != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, ACCESS_BACKGROUND_LOCATION);
+                    new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, PERMISSION_BACKGROUND_LOCATION);
             bHasPermission = false;
         }
 
@@ -225,7 +228,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                 != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, WAKE_LOCK);
+                    new String[]{Manifest.permission.WAKE_LOCK}, PERMISSION_WAKE_LOCK);
             bHasPermission = false;
         }
 
