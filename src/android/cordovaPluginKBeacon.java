@@ -49,8 +49,6 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     private static final int PERMISSION_COARSE_LOCATION = 22;
     private static final int PERMISSION_FINE_LOCATION = 23;
     private static final int PERMISSION_SCAN = 24;
-    private static final int PERMISSION_BACKGROUND_LOCATION = 25;
-    private static final int PERMISSION_WAKE_LOCK = 26;
 
 
 
@@ -215,23 +213,6 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
 
     private boolean checkBluetoothPermitAllowed() {
         boolean bHasPermission = true;
-
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, PERMISSION_BACKGROUND_LOCATION);
-            bHasPermission = false;
-        }
-
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WAKE_LOCK)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.WAKE_LOCK}, PERMISSION_WAKE_LOCK);
-            bHasPermission = false;
-        }
-
 
         /**
          * for android6, the app need corse location permission for BLE scanning
