@@ -201,6 +201,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     }
 
     private void checkPermissions(CallbackContext callbackContext){
+        checkBluetoothPermitAllowed();
         if (!checkBluetoothPermitAllowed()) {
             PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, false);
             callbackContext.sendPluginResult(pluginResult);
