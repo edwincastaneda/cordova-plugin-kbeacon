@@ -217,40 +217,40 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     private boolean checkBluetoothPermitAllowed() {
         boolean bHasPermission = true;
 
-//         /**
-//          * for android6, the app need corse location permission for BLE scanning
-//          */
-//         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
-//                 != PackageManager.PERMISSION_GRANTED) {
-//
-//             ActivityCompat.requestPermissions(getActivity(),
-//                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_COARSE_LOCATION);
-//             bHasPermission = false;
-//         }
-//         /**
-//          * for android10, the app need fine location permission for BLE scanning
-//          */
-//         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
-//                 != PackageManager.PERMISSION_GRANTED) {
-//             ActivityCompat.requestPermissions(getActivity(),
-//                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
-//             bHasPermission = false;
-//         }
-//         /**
-//          * for android 12, the app need declare follow permissions
-//          */
-//         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-//         {
-//             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-//                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.BLUETOOTH_SCAN}, PERMISSION_SCAN);
-//                 bHasPermission = false;
-//             }
-//             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-//                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.BLUETOOTH_CONNECT}, PERMISSION_CONNECT);
-//                 bHasPermission = false;
-//             }
-//
-//         }
+        /**
+         * for android6, the app need corse location permission for BLE scanning
+         */
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_COARSE_LOCATION);
+            bHasPermission = false;
+        }
+        /**
+         * for android10, the app need fine location permission for BLE scanning
+         */
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
+            bHasPermission = false;
+        }
+        /**
+         * for android 12, the app need declare follow permissions
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+        {
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.BLUETOOTH_SCAN}, PERMISSION_SCAN);
+                bHasPermission = false;
+            }
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.BLUETOOTH_CONNECT}, PERMISSION_CONNECT);
+                bHasPermission = false;
+            }
+
+        }
         return bHasPermission;
     }
 
