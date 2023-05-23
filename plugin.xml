@@ -12,18 +12,25 @@
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml">
-            <uses-feature
-                    android:name="android.hardware.bluetooth_le"
-                    android:required="true" />
-
-            <uses-permission android:name="android.permission.BLUETOOTH"/>
-            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+            <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
+            <uses-permission android:name="android.permission.BLUETOOTH" />
+            <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
             <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
             <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
         </config-file>
-<!--        <framework src="src/android/kbeacon.gradle" custom="true" type="gradleReference" />-->
         <framework src="com.kkmcn.kbeaconlib2:kbeaconlib2:1.1.9" />
         <source-file src="src/android/cordovaPluginKBeacon.java" target-dir="src/app/heroesde4patas/cordova/plugin/kbeacon/cordovaPluginKBeacon" />
+    </platform>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="cordovaPluginKBeacon">
+                <param name="ios-package" value="cordovaPluginKBeacon" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/cordovaPluginKBeacon.swift
+" />
     </platform>
 </plugin>
