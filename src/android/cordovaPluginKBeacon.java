@@ -49,7 +49,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
     private static final int PERMISSION_COARSE_LOCATION = 22;
     private static final int PERMISSION_FINE_LOCATION = 23;
     private static final int PERMISSION_SCAN = 24;
-    private static final int PERMISSION_ACCESS_BACKGROUND_LOCATION = 25;
+    //private static final int PERMISSION_ACCESS_BACKGROUND_LOCATION = 25;
 
 
 
@@ -249,10 +249,10 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.BLUETOOTH_CONNECT}, PERMISSION_CONNECT);
                 bHasPermission = false;
             }
-            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, PERMISSION_ACCESS_BACKGROUND_LOCATION);
-                bHasPermission = false;
-            }
+//             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, PERMISSION_ACCESS_BACKGROUND_LOCATION);
+//                 bHasPermission = false;
+//             }
         }
         return bHasPermission;
     }
