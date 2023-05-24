@@ -25,12 +25,20 @@
     </platform>
 
     <platform name="ios">
+<!--        <preference name="UseLegacySwiftLanguageVersion" value="true" />-->
+
         <config-file parent="/*" target="config.xml">
             <feature name="cordovaPluginKBeacon">
                 <param name="ios-package" value="cordovaPluginKBeacon" />
+                <param name="onload" value="true" />
             </feature>
         </config-file>
-        <source-file src="src/ios/cordovaPluginKBeacon.swift
-" />
+        <source-file src="src/ios/cordovaPluginKBeacon.swift" />
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
+        <podspec>
+            <pods use-frameworks="true">
+                <pod name="kbeaconlib2" spec="1.1.1" />
+            </pods>
+        </podspec>
     </platform>
 </plugin>

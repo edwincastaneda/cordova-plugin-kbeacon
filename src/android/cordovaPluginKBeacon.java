@@ -75,7 +75,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                             case KBAdvType.IBeacon: {
                                 KBAdvPacketIBeacon advIBeacon = (KBAdvPacketIBeacon) advPacket;
                                 JSONArray KBArray = new JSONArray();
-                                    KBArray.put(beacon.getMac());
+
                                     KBArray.put(beacon.getName());
                                     KBArray.put(beacon.getRssi());
 
@@ -84,7 +84,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                                     KBArray.put(advIBeacon.getMajorID());
                                     KBArray.put(advIBeacon.getMinorID());
 
-                                mBeaconsDictory.put(beacon.getMac(), KBArray);
+                                mBeaconsDictory.put(beacon.getUuid(), KBArray);
                                 }
                                break;
                             }
