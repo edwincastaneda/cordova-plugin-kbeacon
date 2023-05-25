@@ -76,15 +76,15 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                                 KBAdvPacketIBeacon advIBeacon = (KBAdvPacketIBeacon) advPacket;
                                 JSONArray KBArray = new JSONArray();
 
-                                    KBArray.put(beacon.getName());
+                                    //KBArray.put(beacon.getName());
                                     KBArray.put(beacon.getRssi());
 
                                     KBArray.put(advIBeacon.getRefTxPower());
                                     KBArray.put(advIBeacon.getUuid());
-                                    KBArray.put(advIBeacon.getMajorID());
                                     KBArray.put(advIBeacon.getMinorID());
+                                    KBArray.put(advIBeacon.getMajorID());
 
-                                mBeaconsDictory.put(beacon.getUuid(), KBArray);
+                                mBeaconsDictory.put(advIBeacon.getUuid(), KBArray);
                                 }
                                break;
                             }
