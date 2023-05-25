@@ -89,7 +89,7 @@ public class cordovaPluginKBeacon : CDVPlugin, KBeaconMgrDelegate{
 
         let pluginResult:CDVPluginResult
         if cordovaPluginKBeacon.mBeaconsDictory.count > 0 {
-            pluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK, messageAs: cordovaPluginKBeacon.mBeaconsDictory)
+            pluginResult = CDVPluginResult.init(status: CDVCommandStatus_OK, messageAs: cordovaPluginKBeacon.mBeaconsArray)
         } else {
             pluginResult = CDVPluginResult.init(status: CDVCommandStatus_ERROR)
         }
