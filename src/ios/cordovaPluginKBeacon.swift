@@ -73,19 +73,7 @@ public class cordovaPluginKBeacon : CDVPlugin, KBeaconMgrDelegate{
     }
 
     @objc
-    func getDiscoveredDevicesiOS(_ command: CDVInvokedUrlCommand){
-
-       /* print(cordovaPluginKBeacon.mBeaconsDictory)
-
-        var objeto = "["
-        for i in 0..<cordovaPluginKBeacon.mBeaconsDictory.count {
-            if i > 0 {
-                objeto += ","
-            }
-            objeto += cordovaPluginKBeacon.mBeaconsArray[i] as! String
-        }
-        objeto += "]"
-*/
+    func getDiscoveredDevices(_ command: CDVInvokedUrlCommand){
 
         let pluginResult:CDVPluginResult
         if cordovaPluginKBeacon.mBeaconsDictory.count > 0 {
@@ -101,7 +89,7 @@ public class cordovaPluginKBeacon : CDVPlugin, KBeaconMgrDelegate{
     }
 
     @objc
-    func startScaniOS(_ command: CDVInvokedUrlCommand) {
+    func startScan(_ command: CDVInvokedUrlCommand) {
         let pluginResult:CDVPluginResult
         let scanResult = mBeaconsMgr!.startScanning()
 
@@ -117,5 +105,9 @@ public class cordovaPluginKBeacon : CDVPlugin, KBeaconMgrDelegate{
         self.commandDelegate.send(pluginResult, callbackId: command.callbackId)
       }
 
+    @objc
+    func stopScan() {
+         mBeaconsMgr!.stopScanning()
+      }
 
 }
