@@ -106,7 +106,7 @@ public class cordovaPluginKBeacon : CDVPlugin, KBeaconMgrDelegate{
       }
 
     @objc
-    func stopScan() {
+    func stopScanning() {
          mBeaconsMgr!.stopScanning()
       }
 
