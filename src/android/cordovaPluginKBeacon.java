@@ -84,7 +84,7 @@ public class cordovaPluginKBeacon extends CordovaPlugin {
                                     KBArray.put(advIBeacon.getMinorID());
                                     KBArray.put(advIBeacon.getMajorID());
 
-                                mBeaconsDictory.put(advIBeacon.getUuid(), KBArray);
+                                mBeaconsDictory.put(advIBeacon.getMinorID(), KBArray);
                                 }
                                break;
                             }
