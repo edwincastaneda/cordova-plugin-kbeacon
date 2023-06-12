@@ -60,7 +60,7 @@ public class cordovaPluginKBeacon : CDVPlugin, KBeaconMgrDelegate{
                     KBArray.append(String(iBeaconAdv.minorID))
                     KBArray.append(String(iBeaconAdv.majorID))
 
-                    cordovaPluginKBeacon.mBeaconsDictory[String(advBeacon.minorID)!] = KBArray
+                    cordovaPluginKBeacon.mBeaconsDictory[advBeacon.minorID!] = KBArray
                 }
 
             default:
